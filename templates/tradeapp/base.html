@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tradeapp/trade.css' %}">
+    {%block style %}
+   
+    {% endblock%}
+</head>
+<body>
+  <header class="header">
+    <nav class="navbar navbar-style">
+      <div class="container">
+        <div class="navbar-header navbar-center">
+          <a href="#"><img class="logo" src="#"></a>
+          <button type="button" class="navbar-toggle" data-toggle="
+          collapse" data-target="#micon">
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="micon">
+          <ul class="nav navbar-nav navbar-right" >
+            <li> <a href="{% url 'dashboard' %}">Dashboard</a></li>
+            <li> <a href="{% url 'order' %}">Orders</a></li>
+            <li> <a href="{% url 'position' %}">Positions</a></li>
+            <li> <a href="{% url 'holding' %}">Holding</a></li>
+            <li> <a href="{% url 'funds' %}">Funds</a></li>
+            <li> <a href="{% url 'logout' %}">logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div class="row">
+      <div class="col-sm-3 border">
+        <div class="search-container">
+          <form  action="" class="example"> {% csrf_token %}
+            <input type="text" id="search" name="search" />
+            <ul id="search-results">
+            </ul>
+          </form>
+        </div>
+      </div>
+      <div class="col-sm-9">
+        {% block body %}
+        {%endblock %}
+        {% for error in messages %}
+          <p class="text-danger">{{ error }}</p>
+        {% endfor %}
+        <div class="modal fade" id="lab-slide-bottom-popup" data-keyboard="false" data-backdrop="">
+          <div class="lab-modal-body">
+              <div class="header-right">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                 {% csrf_token %}
+              </div>
+            <br>
+            <form method="post" action="{% url 'modal' %}"> 
+              {% csrf_token %}
+               
+
+              <input type="text" name="company" id="company" >
+              <input type="button" name="" id="button" value="switch" style="float: right;">
+              <br><br>
+              <input type="radio" name="choice1" value="mis" checked id="mis"> MIS
+              <input type="radio" name="choice1" value="nrml" id="nrml">NRML  
+              <input style="margin:0px 0px 0px 250px"  type="radio"  name="choice2" value="market" checked id="market"> MARKET
+              <input type="radio" name="choice2" value="limit" id="limit">LIMIT 
+               <input type="radio" name="choice2" value="sl" id="sl"> SL
+              <input type="radio" name="choice2" value="slm" id="slm">SL-M<br>   
+              <br>
+              <input style="width:20%" class="heighttext" type="number" name="qty" id="name" placeholder="Qty">
+
+              <input style="width:20%" class="heighttext" type="number" id='price' name="price" placeholder="Price">
+              <input style="width:20%" class="heighttext" type="number" name="tprice" id="triggerprice" placeholder="Trigger Price">
+              <input style="width:20%" class="heighttext" type="number" name="disclose" id="disclose" placeholder="Disclose quantiy">
+              <div id="boPopup" hidden>
+                <input style="width:20%" class="heighttext" type="number" name="sloss" id="sloss" placeholder="stop loss">
+                <input style="width:20%" class="heighttext" type="number" id='target' name="targer" placeholder="target">
+                <input style="width:20%" class="heighttext" type="number" id='tsloss' name="tsloss" placeholder="trailing stoploss">
+              </div>
+
+              <br>
+              <button type="button" style="float: right;">cancel</button>
+              <input style="float: right;" type="submit" name="button" id="switch" value="sell">
+              <input type="button"  value="more" onclick="myFunction()">
+              <div id="myDIV" hidden>
+                <input type="radio" name="check" id="regular" checked="" value="regular">Regular
+                <input type="radio" name="check" id="bo" onclick="myFunction2()" value="bo">BO
+                <input type="radio" name="check" id="co" >CO
+                <input type="radio" name="check" id="amo" value="amo">AMO<br>
+                <input type="radio" name="check1" id="day" checked="" value="day">Day
+                <input type="radio" name="check1" id="ioc" value="ioc">IOC
+              </div>
+            </form>
+          </div>    
+        </div>
+      </div>
+    </div>
+  </header>
+  {% load static %}
+  <script src="{% static 'tradeapp/trade.js' %}"></script>
+</body>
+</html>

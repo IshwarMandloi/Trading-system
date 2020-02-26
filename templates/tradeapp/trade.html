@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+  </style> 
+ </head>
+ <body>
+	<nav class="navbar navbar-inverse">
+   <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="">Realtrader</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="#">Products</a></li>
+      <li><a href="#">Account</a></li>
+    </ul>
+    <form method="post" action="/search/">
+    	{%csrf_token%}
+    	<div class="form-group">
+    		<div class="col-lg-5">
+    			<input type="text" name="srh" class="mt-4" placeholder="Enter company name">
+          <label class="col-lg-2">
+            <button type="submit" class="col px-md-5">search</button>
+          </label>
+    		</div>	
+    	</div>
+    </form>
+    <div>
+    	{%if messages%}
+	    	<ul class="messages">
+	    		{%for k in messages%}
+	    		  <li style="color:red">{{k}}</li>
+	    		{% endfor%}
+	    	</ul>
+    	{%endif%}
+    </div>
+    <div style="color:red">
+    	{%if sr%}
+    	   {%for k in sr%}
+    	    <table border="0px" width="300px">
+    	    	<tr>
+    	    		<td>name</td>
+    	    		<td>{{k.name}}</td>
+    	    	</tr>
+    	    	<tr>
+    	    		<td>Curret Price</td>
+    	    		<td>{{k.current_price}}</td>
+    	    	</tr>
+    	    	<tr>
+    	    		<td>open_price</td>
+    	    		<td>{{k.open_price}}</td>
+    	    	</tr>
+    	    	<tr>
+    	    		<td>previous_close</td>
+    	    		<td>{{k.previous_close}}</td>
+    	    	</tr>
+
+    	    	<tr>
+    	    		<td>high</td>
+    	    		<td>{{k.high}}</td>
+    	    	</tr>
+
+    	    	<tr>
+    	    		<td>low</td>
+    	    		<td>{{k.low}}</td>
+
+    	    	</tr>
+    	    	<tr>
+    	    		<td>Action</td>
+    	    		<td><a href="{% url 'order' k.id %}">buy</a></td>
+    	    	</tr>
+
+    	    </table>
+    	    {% endfor%}
+    	{% endif%}     
+      <ul class="nav navbar-nav navbar-right">
+        {% if request.user.is_authenticated is True %}
+          <li class="active"><a href="#">WELCOME{{request.user}}</a></li>
+          <li><a href="{% url 'logout' %}">logout</a></li>
+        {% endif %}
+
+        {% if request.user.is_authenticated is False %}
+          <a  href="signup" class="btn btn-success">SignUp</a>
+          <a  href="{% url 'login'%}" class='btn btn-success pb-5'>Login</a>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+<br>
+<center>
+ <table border="4">
+<thead>
+<tr>
+<th>Name  </th>
+<th>Current</th>
+<th>Open</th>
+<th>Pre Close</th>
+<th>High</th>
+<th>Low</th>
+<th>Actions</th>
+</tr>
+</thead>
+<tbody>
+
+
+{% for company in object_list %}
+<tr>
+<td>{{ company.name }}</td>
+<td>{{ company.current_price }}</td>
+<td>{{ company.open_price}}</td>
+<td>{{ company.previous_close }}</td>
+<td>{{ company.high }}</td>
+<td>{{ company.low }}</td>
+
+<td>
+</tr>
+
+
+{% endfor %}
+
+</tbody>
+</table>
+</center>
+</body>
+</html>
+
+

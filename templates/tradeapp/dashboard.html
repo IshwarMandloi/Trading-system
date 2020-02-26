@@ -1,0 +1,49 @@
+{% extends 'tradeapp/base.html' %}
+{% block body %}
+{% load static %}
+  {% if user.is_authenticated %}
+    <h3> Hi {{user.first_name}}</h3>
+  {% endif%}
+
+	<div id="overviews" class="section wb" style="padding-top: 50px">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-2 col-md-offset-1">
+                  <img src="{% static 'image/download (1).png'%}" width="10%" class="d-inline-block align-top" alt="">
+                  	<h6> Equity</h6> 
+                  	<h2>1.2</h2>                   
+                    <h6>Margin Available</h6>
+                </div>
+                <div class="col-md-2 col-md-offset-0" style="padding-top: 70px">
+                  	<h6> Margins used 0</h6> 
+                  	<h6> Opening Balance 1.2</h6> 
+                </div>
+                <div class="col-md-2 col-md-offset-1">
+                  <img src="{% static 'image/images.png'%}" width="10%" class="d-inline-block align-top" alt="">
+                  	<h6>  Commodity</h6> 
+                  	<h2>1.2</h2>                   
+                    <h6>Margin Available</h6>
+                </div>
+                <div class="col-md-2 col-md-offset-0" style="padding-top: 70px">
+                  	<h6> Margins used 0</h6> 
+                  	<h6> Opening Balance 0</h6> 
+                </div>
+            </div>         
+          </div>
+        </div>
+
+
+<div id="overviews" class="section wb" style="padding-top: 50px">
+        <div class="container">
+            <div class="section-title row text-center">
+                <div class="col-md-6 col-md-offset-2">
+                  <img src="{% static 'image/holdings.svg'%}" width="220" height="120" class="d-inline-block align-top" alt="">                    
+                    <p class="lead">You don't have any stocks in your DEMAT yet. Get started with absolutely free equity investments. </p><br>
+                    <center> <a href="#" class="btn btn-primary">Start investment</a></center>
+                </div>
+            </div>         
+          </div>
+        </div>
+  
+{% endblock%}
+

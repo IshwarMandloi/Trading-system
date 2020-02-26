@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+<body>
+
+	<input type="button" name="" id="switch" value="buy">
+    <input type="button" name="" id="l" value="switch">
+
+<p>Click on this paragraph.</p>
+
+<script type="text/javascript">
+	$(document).ready(function(){
+  $("#l").click(function(){
+  	var x = $("#switch").val();
+  	if (x=='buy') {
+  		$("#switch").prop('value','sell')
+    }
+    else
+    {
+    	$("#switch").prop('value','buy')
+    }
+
+    
+  });
+});
+	
+</script>
+</body>
+</html>

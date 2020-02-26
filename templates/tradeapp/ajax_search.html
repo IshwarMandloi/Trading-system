@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style>
+.btn {
+  border: none;
+  background-color: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+.btn:hover {background: #eee;}
+
+.success {color: green;}
+.info {color: dodgerblue;}
+.warning {color: orange;}
+.danger {color: red;}
+.default {color: black;}
+</style>
+
+</head>
+<body>
+{% if sr %}
+{% for sr1 in sr %}
+ <li>{{sr1.name}}
+
+
+   <button type="button" class="btn info " data-toggle="modal" data-target="#lab-slide-bottom-popup" 
+   onclick="myFunction1('{{sr1.name}}','{{sr1.current_price}}')">buy</button>
+   <button type="button" class="btn info" data-toggle="modal" data-target="#lab-slide-bottom-popup" onclick="myFunction1('{{sr1.name}})">sell</button>
+   <button class="btn info">Info</button>
+ </li>
+{% endfor%}
+{% else %}
+ <li>none to show</li>
+ {% endif%}
+<script type="text/javascript">
+	
+</script>
+</body>
+</html>
